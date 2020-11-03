@@ -2,6 +2,8 @@ function Book(slots) {
     this.isbn = slots.isbn;
     this.title = slots.title;
     this.year = slots.year;
+    this.author = slots.author;
+    this.favorite = slots.favorite;
 }
 
 Book.instances = {}; 
@@ -66,6 +68,12 @@ Book.update = function(slots) {
     if (book.year !== slots.year) {
         book.year = slots.year;
     }
+    if (book.author !== slots.author) {
+        book.author = slots.author;
+    }
+    if (book.favorite !== slots.favorite) {
+        book.favorite = slots.favorite;
+    }
     Book.instances[slots.isbn] = book
     console.log("Book " + book.isbn + " has been updated.\n")
 }
@@ -86,8 +94,8 @@ Book.clearData = function() {
 }
 
 Book.createTestData = function() {
-    Book.instances["006251587X"] = new Book({isbn:"006251587X", title:"Weaving the Web", year:2000});
-    Book.instances["0465026567"] = new Book({isbn:"0465026567", title:"Gödel, Escher, Bach", year:1999});
-    Book.instances["0465030793"] = new Book({isbn:"0465030793", title:"I Am A Strange Loop", year:2008});
+    Book.instances["006251587X"] = new Book({isbn:"006251587X", title:"Going Postal", year:2004, author: "Terry Pratchett", favorite: true});
+    Book.instances["0465026567"] = new Book({isbn:"0465026567", title:"Gödel, Escher, Bach", year:1999, author: "Unknown", favorite: false});
+    Book.instances["0465030793"] = new Book({isbn:"0465030793", title:"I Am A Strange Loop", year:2008, author: "Douglas Hofstadter", favorite: false});
     Book.saveAll();
 }
