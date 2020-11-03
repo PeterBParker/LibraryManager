@@ -9,7 +9,11 @@ pl.view.createBook = {
     },
     handleSaveButtonClickEvent: function() {
         var formEl = document.forms["Book"];
-        var slots = {isbn: formEl.isbn.value, title: formEl.title.value, year: formEl.year.value, author: formEl.author.value, favorite: formEl.favorite.value};
+        var isFavorite = false;
+        if(formEl.favorite.checked) {
+            isFavorite = true;
+        }
+        var slots = {isbn: formEl.isbn.value, title: formEl.title.value, year: formEl.year.value, author: formEl.author.value, favorite: isFavorite};
         Book.add(slots);
         formEl.reset();
     }
