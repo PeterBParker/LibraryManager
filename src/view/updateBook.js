@@ -15,13 +15,22 @@ pl.view.updateBook = {
             var key = selectBookEl.value;
             if (key) {
                 book = Book.instances[key];
-                formEl.isbn.value = book.isbn;
-                formEl.title.value = book.title;
-                formEl.year.value = book.year;
+                bookProps = Object.keys(book); 
+                //loop through inputs and if a bookProps name matches the 
+                //input name, set the input value to the value of the book property i.e. book[bookPropKey]
+                //then remove the matching bookProps value from the bookProps list to optimize run time.
+                for(var inp of formEl.getElementsByTagName("input")) {
+                    //By using indexOf, we search the list once and get 1) if it matches and 2) the splice value
+                    var index = bookProps.indexOf(inp.getAttribute("name"));
+                    if (index !== -1) {
+                        inp.value = book[inp.getAttribute("name")];
+                        bookProps.splice(index, 1);
+                    }
+                }       
             } else {
-                formEl.isbn.value = "";
-                formEl.title.value = "";
-                formEl.year.value = "";
+                for(var inp of formEl.getElementsByTagName("input")) {
+                    inp.value = "";
+                }
             }
         });
         saveButton.addEventListener("click", pl.view.updateBook.handleUpdateButtonClickEvent);
