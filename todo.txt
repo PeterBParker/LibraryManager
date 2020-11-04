@@ -1,8 +1,4 @@
 Todo:
-2. Add boolean input support for create/update books
 3. Add persistent database support
 4. Abstract away number of book properties from all js/html files 
 5. Add some CSS
-
-Done:
-Add author/favorite support for list books

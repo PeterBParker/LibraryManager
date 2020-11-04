@@ -21,9 +21,18 @@ pl.view.updateBook = {
                 //then remove the matching bookProps value from the bookProps list to optimize run time.
                 for(var inp of formEl.getElementsByTagName("input")) {
                     //By using indexOf, we search the list once and get 1) if it matches and 2) the splice value
-                    var index = bookProps.indexOf(inp.getAttribute("name"));
+                    var inpName = inp.getAttribute("name");
+                    var index = bookProps.indexOf(inpName);
                     if (index !== -1) {
-                        inp.value = book[inp.getAttribute("name")];
+                        if (inpName == "favorite") {
+                            if (book[inpName] == true) {
+                                inp.checked = true;
+                            } else {
+                                inp.checked = false;
+                            }                            
+                        } else {
+                            inp.value = book[inpName];
+                        }
                         bookProps.splice(index, 1);
                     }
                 }       
@@ -40,7 +49,11 @@ pl.view.updateBook = {
     },
     handleUpdateButtonClickEvent: function() {
         var formEl = document.forms["Book"];
-        var slots = {isbn: formEl.isbn.value, title:formEl.title.value, year:formEl.year.value};
+        var isFavorite = false;
+        if(formEl.favorite.checked) {
+            isFavorite = true;
+        }
+        var slots = {isbn: formEl.isbn.value, title:formEl.title.value, year:formEl.year.value, author: formEl.author.value, favorite:isFavorite};
         Book.update(slots);
         formEl.reset();
     }
