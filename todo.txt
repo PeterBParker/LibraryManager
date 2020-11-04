@@ -1,4 +1,4 @@
 Todo:
-3. Add persistent database support
+3. Add persistent database support - migrate to NodeJS
 4. Abstract away number of book properties from all js/html files 
 5. Add some CSS
